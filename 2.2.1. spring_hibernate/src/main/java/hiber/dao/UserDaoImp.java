@@ -1,6 +1,5 @@
 package hiber.dao;
 
-import hiber.model.Car;
 import hiber.model.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -13,28 +12,28 @@ import java.util.List;
 @Repository
 public class UserDaoImp implements UserDao {
 
-   @Autowired
-   private SessionFactory sessionFactory;
+    @Autowired
+    private SessionFactory sessionFactory;
 
-   @Override
-   public void add(User user) {
-      sessionFactory.getCurrentSession().save(user);
-   }
+    @Override
+    public void add(User user) {
+        sessionFactory.getCurrentSession().save(user);
+    }
 
-   @Override
-   @SuppressWarnings("unchecked")
-   public List<User> listUsers() {
-      TypedQuery<User> query=sessionFactory.getCurrentSession().createQuery("from User");
-      return query.getResultList();
-   }
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<User> listUsers() {
+        TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from User");
+        return query.getResultList();
+    }
 
-   @Override
-   public User getUserByCar(int series, String model) {
+    @Override
+    public User getUserByCar(int series, String model) {
 
-      Query query = sessionFactory.getCurrentSession()
-              .createQuery("select u from User u where u.car.series = :series and u.car.model = :model", User.class)
-              .setParameter("series", series).setParameter("model", model);
-      User user = (User)query.uniqueResult();
-      return user;
-   }
+        Query query = sessionFactory.getCurrentSession()
+                .createQuery("select u from User u where u.car.series = :series and u.car.model = :model", User.class)
+                .setParameter("series", series).setParameter("model", model);
+        User user = (User) query.uniqueResult();
+        return user;
+    }
 }

@@ -17,7 +17,8 @@ public class Car {
     @OneToOne(mappedBy = "car")
     private User user;
 
-    public Car() {}
+    public Car() {
+    }
 
     public Car(String model, int series) {
         this.model = model;
